@@ -12,4 +12,4 @@ const generateNonce = () => {
   return nonce;
 };
 
-module.exports = { getCurrentTimeStamps, generateNonce };
+export { getCurrentTimeStamps, generateNonce };

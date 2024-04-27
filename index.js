@@ -1,16 +1,14 @@
 // access environmental variables
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 // imports
-const {
-  ToadScheduler,
-  SimpleIntervalJob,
-  AsyncTask,
-} = require("toad-scheduler");
+import { ToadScheduler, SimpleIntervalJob, AsyncTask } from "toad-scheduler";
+import chalk from "chalk";
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { handlePostContentToTwitter } = require("./configs/twitterConfig");
-const { handlePostContentToFacebook } = require("./configs/facebookConfig");
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { handlePostContentToTwitter } from "./configs/twitterConfig.js";
+import { handlePostContentToFacebook } from "./configs/facebookConfig.js";
 
 // create an instance of google AI with your Google Api Key
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
@@ -37,13 +35,12 @@ const task = new AsyncTask("auto post task", async () => {
     .generateContent(prompt)
     .then((result) => {
       const contentToPost = result.response.text().replace("**", "");
-
-      console.log(contentToPost);
+      console.log(chalk.bgGreen.bold(contentToPost));
       // post the content to your social accounts
       // ** more to be added **
       Promise.allSettled([
-        handlePostContentToTwitter(contentToPost),
         handlePostContentToFacebook(contentToPost),
+        handlePostContentToTwitter(contentToPost),
       ]);
       // ****more social media account will be added soon****
     })
@@ -54,7 +51,7 @@ const task = new AsyncTask("auto post task", async () => {
 
 // Adjust the job interval to suit your usage.
 // presently this is going to run at every 5 hours provided the server is always running
-const job = new SimpleIntervalJob({ hours: 5 }, task);
+const job = new SimpleIntervalJob({ seconds: 5 }, task);
 
 // start up the job
 scheduler.addSimpleIntervalJob(job);

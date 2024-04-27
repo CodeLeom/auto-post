@@ -1,4 +1,4 @@
-const { RestliClient } = require("linkedin-api-client");
+import { RestliClient } from "linkedin-api-client";
 const restliClient = new RestliClient();
 
 // still trying to figure out how to get a linkedin user urn:li:person:ID
@@ -34,4 +34,4 @@ console.log(handlePostContentToLinkedIn());
 // },
 // },
 
-module.exports = { handlePostContentToLinkedIn };
+export { handlePostContentToLinkedIn };

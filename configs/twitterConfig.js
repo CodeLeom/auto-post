@@ -1,5 +1,8 @@
-const axios = require("axios");
-const { getCurrentTimeStamps, generateNonce } = require("../utils");
+import dotenv from "dotenv";
+dotenv.config();
+import axios from "axios";
+import { getCurrentTimeStamps, generateNonce } from "../utils.js";
+import chalk from "chalk";
 
 const consumerApiKey = process.env.TWITTER_CONSUMER_API_KEY;
 const twitterAccessToken = process.env.TWITTER_ACCESS_TOKEN;
@@ -30,13 +33,17 @@ const handlePostContentToTwitter = async (contentToPost) => {
   axios
     .request(config)
     .then((result) => {
-      console.log(result);
+      console.log(
+        `${chalk.bgBlack.bold("Posted successfully to X:")}`,
+        result.data
+      );
     })
     .catch((err) => {
-      console.log(err);
+      console.log(
+        `${chalk.bgRed.bold("Error occurred while posting to X:")}`,
+        err.response.data
+      );
     });
 };
 
-module.exports = { handlePostContentToTwitter };
-
-handlePostContentToTwitter();
+export { handlePostContentToTwitter };

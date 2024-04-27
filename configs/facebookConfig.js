@@ -1,4 +1,7 @@
-const axios = require("axios");
+import dotenv from "dotenv";
+dotenv.config();
+import axios from "axios";
+import chalk from "chalk";
 
 const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
 const page_id = process.env.FACEBOOK_PAGE_ID;
@@ -12,11 +15,17 @@ const handlePostContentToFacebook = (contentToPost) => {
       }
     )
     .then((response) => {
-      console.log("Posted successfully:", response.data);
+      console.log(
+        `${chalk.bgBlue.bold("Posted successfully to facebook:")}`,
+        response.data
+      );
     })
     .catch((error) => {
-      console.error("Error occurred while posting:", error.response.data);
+      console.log(
+        `${chalk.bgBlue.bold("Error occurred while posting to facebook:")}`,
+        error.response.data
+      );
     });
 };
 
-module.exports = { handlePostContentToFacebook };
+export { handlePostContentToFacebook };
