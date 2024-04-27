@@ -59,3 +59,13 @@ When stopping your application, you can call scheduler.stop() to halt the schedu
 ## Note
 
 Ensure your server is always running for the scheduled tasks to execute as expected.
+
+## API KEYS
+
+To learn more about how to get your api keys
+
+- Facebook [https://developers.facebook.com/docs/]
+
+- Google [https://aistudio.google.com]
+
+- X formerly(twitter) [https://developer.twitter.com/en]
